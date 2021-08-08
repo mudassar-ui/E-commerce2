@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'product.dart';
+import 'package:http/http.dart' as http;
+import './product.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [
@@ -64,6 +65,8 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
+  // add new product
+
   void addProduct(Product product) {
     final newProduct = Product(
         id: DateTime.now().toString(),
@@ -76,7 +79,7 @@ class Products with ChangeNotifier {
     notifyListeners();
   }
 
-  //edit product method
+  //edit existing product
   void updateProduct(String id, Product newProduct) {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
@@ -85,5 +88,12 @@ class Products with ChangeNotifier {
     } else {
       print('...');
     }
+  }
+
+  //delete product
+
+  void deleteProduct(String id) {
+    _items.removeWhere((prod) => prod.id == id);
+    notifyListeners();
   }
 }

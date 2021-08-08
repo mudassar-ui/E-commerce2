@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Badge extends StatelessWidget {
   final Widget child;
   final String value;
-  final Color color;
+  final Color? color;
 
   const Badge({
     //Key key,
