@@ -68,11 +68,11 @@ class Products with ChangeNotifier {
 
   // add new product
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     //const url = 'https://shopmobileapp-3dfb7-default-rtdb.firebaseio.com/products.json';
     var url = Uri.https(
         'shopmobileapp-3dfb7-default-rtdb.firebaseio.com', '/products.json');
-    http
+    return http
         .post(url,
             body: json.encode({
               'title': product.title,
