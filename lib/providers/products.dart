@@ -68,20 +68,20 @@ class Products with ChangeNotifier {
 
   // add new product
 
-  Future<void> addProduct(Product product) {
+  Future<void> addProduct(Product product) async {
     //const url = 'https://shopmobileapp-3dfb7-default-rtdb.firebaseio.com/products.json';
     var url = Uri.https(
-        'shopmobileapp-3dfb7-default-rtdb.firebaseio.com', '/products.json');
-    return http
-        .post(url,
-            body: json.encode({
-              'title': product.title,
-              'description': product.description,
-              'imageUrl': product.imageUrl,
-              'price': product.price,
-              'isFavorite': product.isFavorite,
-            }))
-        .then((response) {
+        'shopmobileapp-3dfb7-default-rtdb.firebaseio.com', '/products');
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'title': product.title,
+            'description': product.description,
+            'imageUrl': product.imageUrl,
+            'price': product.price,
+            'isFavorite': product.isFavorite,
+          }));
+
       print(json.decode(response.body));
       final newProduct = Product(
           id: json.decode(response.body)['name'],
@@ -92,7 +92,9 @@ class Products with ChangeNotifier {
       _items.add(newProduct);
       //_items.insert(0, newProduct); //we can also use this insert method ,insert at the start of the list
       notifyListeners();
-    });
+    } catch (error) {
+      throw error;
+    }
   }
 
   //edit existing product
