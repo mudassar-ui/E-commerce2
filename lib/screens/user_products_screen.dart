@@ -8,6 +8,40 @@ import '../screens/edit_product_screen.dart';
 
 class UserProductScreen extends StatelessWidget {
   static const routeName = '/user-product';
+  // var _isInit = true;
+  // var _loading = false;
+  // @override
+  // void initState() {
+  //   // if (_isInit) {
+  //   //   setState(() {
+  //   //     _loading = true;
+  //   //   });
+  //   //   Provider.of<Products>(context, listen: false).fetchData().then((_) {
+  //   //     setState(() {
+  //   //       _loading = false;
+  //   //     });
+  //   //   }); //NullSafety
+  //   // }
+  //   // _isInit = false;
+  //   super.initState();
+  // }
+
+  // @override
+  // void didChangeDependencies() {
+  //   if (_isInit) {
+  //     setState(() {
+  //       _loading = true;
+  //     });
+  //     Provider.of<Products>(context).fetchData().then((_) {
+  //       setState(() {
+  //         _loading = false;
+  //       });
+  //     }); //NullSafety
+  //   }
+  //   _isInit = false;
+  //   super.didChangeDependencies();
+  // }
+
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
