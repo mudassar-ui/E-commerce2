@@ -31,7 +31,7 @@ class Products with ChangeNotifier {
         return;
       }
 
-      final List<Product> loadedProducts = [];
+      final List<Product> loadedProducts=[];
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
           id: prodId,
