@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_complete_guide/models/http_exception.dart';
 import 'package:http/http.dart' as http;
 
 class Auth with ChangeNotifier {
@@ -11,36 +12,50 @@ class Auth with ChangeNotifier {
   Future<void> signup(String? email, String? password) async {
     final url = Uri.parse(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAsZFsDu9Atzt8cfo_NvCLGFiLUS5MBXBU');
-
-    final response = await http.post(
-      url,
-      body: json.encode(
-        {
-          'email': email,
-          'password': password,
-          'returnSecureToken': true,
-        },
-      ),
-    );
-    print('status code : ${response.statusCode}');
-    print(json.decode(response.body));
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode(
+          {
+            'email': email,
+            'password': password,
+            'returnSecureToken': true,
+          },
+        ),
+      );
+      print('sign up Status code : ${response.statusCode}');
+      print('sign up body: ${response.body}');
+      final responseData = jsonDecode(response.body);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> login(String? email, String? password) async {
     final url = Uri.parse(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAsZFsDu9Atzt8cfo_NvCLGFiLUS5MBXBU');
-
-    final response = await http.post(
-      url,
-      body: json.encode(
-        {
-          'email': email,
-          'password': password,
-          'returnSecureToken': true,
-        },
-      ),
-    );
-    print('status code : ${response.statusCode}');
-    print(json.decode(response.body));
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode(
+          {
+            'email': email,
+            'password': password,
+            'returnSecureToken': true,
+          },
+        ),
+      );
+      print('login Status code : ${response.statusCode}');
+      print('login body: ${response.body}');
+      final responseData = jsonDecode(response.body);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 }
