@@ -25,4 +25,22 @@ class Auth with ChangeNotifier {
     print('status code : ${response.statusCode}');
     print(json.decode(response.body));
   }
+
+  Future<void> login(String? email, String? password) async {
+    final url = Uri.parse(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAsZFsDu9Atzt8cfo_NvCLGFiLUS5MBXBU');
+
+    final response = await http.post(
+      url,
+      body: json.encode(
+        {
+          'email': email,
+          'password': password,
+          'returnSecureToken': true,
+        },
+      ),
+    );
+    print('status code : ${response.statusCode}');
+    print(json.decode(response.body));
+  }
 }
